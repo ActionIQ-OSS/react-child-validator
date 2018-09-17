@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseClass checks that a component's children are rendered properly 1`] = `
+<Wrapper1>
+  <div>
+    <Element1
+      key=".0"
+    >
+      <div>
+        Test1
+      </div>
+    </Element1>
+    <Element2
+      key=".1"
+    >
+      <div>
+        Test2
+      </div>
+    </Element2>
+    <div>
+      <span
+        key="0"
+      >
+        <Element3
+          key=".2"
+        >
+          <div>
+            Test3
+          </div>
+        </Element3>
+      </span>
+    </div>
+  </div>
+</Wrapper1>
+`;
+
+exports[`BaseClass checks that a component's children are rendered properly 2`] = `
+<Wrapper1>
+  <div>
+    <Element1
+      key=".0"
+    >
+      <div>
+        Test1
+      </div>
+    </Element1>
+    <Element2
+      key=".1"
+    >
+      <div>
+        Test2
+      </div>
+    </Element2>
+    <div>
+      <span
+        key="0"
+      >
+        <Element3
+          key=".2"
+        >
+          <div>
+            Test3
+          </div>
+        </Element3>
+      </span>
+      <span
+        key="1"
+      >
+        <Element3
+          key=".3"
+        >
+          <div>
+            Test3
+          </div>
+        </Element3>
+      </span>
+      <span
+        key="2"
+      >
+        <Element3
+          key=".4"
+        >
+          <div>
+            Test3
+          </div>
+        </Element3>
+      </span>
+    </div>
+  </div>
+</Wrapper1>
+`;
+
+exports[`BaseClass checks that a component's children are rendered properly 3`] = `
+<Wrapper1>
+  <div>
+    <Element1
+      key=".0"
+    >
+      <div>
+        Test1
+      </div>
+    </Element1>
+    <Element2
+      key=".1"
+    >
+      <div>
+        Test2
+      </div>
+    </Element2>
+    <div>
+      <span
+        key="0"
+      >
+        <Element3
+          key=".2"
+        >
+          <div>
+            Test3
+          </div>
+        </Element3>
+      </span>
+      <span
+        key="1"
+      >
+        <Element2
+          key=".3"
+        >
+          <div>
+            Test2
+          </div>
+        </Element2>
+      </span>
+    </div>
+  </div>
+</Wrapper1>
+`;

@@ -1,0 +1,59 @@
+{
+  "name": "react-child-validator",
+  "version": "0.5.0",
+  "description": "A utility to validate the structure of a React component's children at runtime",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "keywords": [
+    "react",
+    "validation",
+    "react children"
+  ],
+  "author": "actioniq",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ActionIQ-OSS/react-child-validator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ActionIQ-OSS/react-child-validator/issues"
+  },
+  "homepage": "https://github.com/ActionIQ-OSS/react-child-validator#readme",
+  "devDependencies": {
+    "@types/enzyme": "^3.1.13",
+    "@types/jest": "^23.3.2",
+    "@types/react": "^16.4.14",
+    "@types/react-dom": "^16.0.7",
+    "awesome-typescript-loader": "^5.2.1",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
+    "jest": "^23.6.0",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-test-renderer": "^16.5.0",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.0.3"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/test-shim.js",
+      "<rootDir>/test-setup.js"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/test-preprocessor.js"
+    },
+    "testMatch": [
+      "**/test/*.test.(ts|tsx)"
+    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
+  }
+}
