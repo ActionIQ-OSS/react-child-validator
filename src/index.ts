@@ -1,22 +1,4 @@
-import {
-  zeroOrOneOf,
-  zeroOrMoreOf,
-  oneOf,
-  oneOrMoreOf,
-  countOf,
-  countOrMoreOf,
-  countOrLessOf,
-  countBetweenOf,
-  withMapper,
-} from "./child-validator-utils";
-import { BaseClass } from "./base-class";
-import { ReactChildValidator } from "./child-validator";
-import { ReactChild } from "./child-validator-types";
-
 export {
-  BaseClass,
-  ReactChildValidator,
-
   zeroOrOneOf,
   zeroOrMoreOf,
   oneOf,
@@ -25,8 +7,9 @@ export {
   countOrMoreOf,
   countOrLessOf,
   countBetweenOf,
-
   withMapper,
-
-  ReactChild,
-};
+  children
+} from "./child-validator-utils";
+export { BaseClass } from "./base-class";
+export { ReactChildValidator } from "./child-validator";
+export { ReactChild } from "./child-validator-types";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { oneOf, zeroOrOneOf, countOf, oneOrMoreOf, withMapper, ReactChildValidator } from "../src/";
+import { oneOf, zeroOrOneOf, countOf, oneOrMoreOf, withMapper, ReactChildValidator, children } from "../src/";
 import { E1, E2, E3, IPropsE3, ParentComponent } from "./components";
 
 describe("mapper", () => {
@@ -15,7 +15,7 @@ describe("mapper", () => {
         <E3 rand={5} />, // oneOrMoreOf
         <E3 rand={6} />, // oneOrMoreOf
       ],
-      [
+      children(
         oneOf(E3),
         withMapper(
           zeroOrOneOf(E3),
@@ -29,14 +29,9 @@ describe("mapper", () => {
           oneOrMoreOf(E3),
           (c, _) => React.cloneElement(c, { rand: c.props.rand === _.value ? 99 : 55 }),
         ),
-      ],
+      ),
       true,
-    ).matchChildren() as [
-      React.ReactElement<IPropsE3>,
-      React.ReactElement<IPropsE3>,
-      React.ReactElement<IPropsE3>[],
-      React.ReactElement<IPropsE3>[]
-    ];
+    ).matchChildren()
 
     const [oneOfE, zeroOrOneOfE, countOfE, oneOrMoreOfE] = mapped;
 

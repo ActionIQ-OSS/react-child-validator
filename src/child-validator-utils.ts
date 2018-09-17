@@ -29,7 +29,11 @@ export function validateChild(
   return found !== undefined;
 }
 
-export const zeroOrOneOf = (...args: SingleChildType[]): IChildGroup => ({
+export function children<T extends any[]>(...args: T) {
+  return args;
+}
+
+export const zeroOrOneOf = <T extends SingleChildType[]>(...args: T): IChildGroup<T, "optional"> => ({
   match: {
     types: args,
     min: 0,
@@ -37,7 +41,7 @@ export const zeroOrOneOf = (...args: SingleChildType[]): IChildGroup => ({
   },
 });
 
-export const zeroOrMoreOf = (...args: SingleChildType[]): IChildGroup => ({
+export const zeroOrMoreOf = <T extends SingleChildType[]>(...args: T): IChildGroup<T, "array"> => ({
   match: {
     types: args,
     min: 0,
@@ -45,7 +49,7 @@ export const zeroOrMoreOf = (...args: SingleChildType[]): IChildGroup => ({
   },
 });
 
-export const oneOf = (...args: SingleChildType[]): IChildGroup => ({
+export const oneOf = <T extends SingleChildType[]>(...args: T): IChildGroup<T, "one"> => ({
   match: {
     types: args,
     min: 1,
@@ -53,7 +57,7 @@ export const oneOf = (...args: SingleChildType[]): IChildGroup => ({
   },
 });
 
-export const oneOrMoreOf = (...args: SingleChildType[]): IChildGroup => ({
+export const oneOrMoreOf = <T extends SingleChildType[]>(...args: T): IChildGroup<T, "array"> => ({
   match: {
     types: args,
     min: 1,
@@ -61,7 +65,7 @@ export const oneOrMoreOf = (...args: SingleChildType[]): IChildGroup => ({
   },
 });
 
-export const countOf = (count: number, ...args: SingleChildType[]): IChildGroup => ({
+export const countOf = <T extends SingleChildType[]>(count: number, ...args: T): IChildGroup<T, "array"> => ({
   match: {
     types: args,
     min: count,
@@ -69,7 +73,7 @@ export const countOf = (count: number, ...args: SingleChildType[]): IChildGroup 
   },
 });
 
-export const countOrMoreOf = (count: number, ...args: SingleChildType[]): IChildGroup => ({
+export const countOrMoreOf = <T extends SingleChildType[]>(count: number, ...args: T): IChildGroup<T, "array"> => ({
   match: {
     types: args,
     min: count,
@@ -77,7 +81,7 @@ export const countOrMoreOf = (count: number, ...args: SingleChildType[]): IChild
   },
 });
 
-export const countOrLessOf = (count: number, ...args: SingleChildType[]): IChildGroup => ({
+export const countOrLessOf = <T extends SingleChildType[]>(count: number, ...args: T): IChildGroup<T, "array"> => ({
   match: {
     types: args,
     min: 0,
@@ -85,7 +89,7 @@ export const countOrLessOf = (count: number, ...args: SingleChildType[]): IChild
   },
 });
 
-export const countBetweenOf = (min: number, max: number, ...args: SingleChildType[]): IChildGroup => ({
+export const countBetweenOf = <T extends SingleChildType[]>(min: number, max: number, ...args: T): IChildGroup<T, "array"> => ({
   match: {
     types: args,
     min,
@@ -93,7 +97,7 @@ export const countBetweenOf = (min: number, max: number, ...args: SingleChildTyp
   },
 });
 
-export const withMapper = (childGroup: IChildGroup, mapper: Mapper): IChildGroup => ({
+export const withMapper = <Types extends SingleChildType[], Type extends "one" | "optional" | "array" | "optionalArray">(childGroup: IChildGroup<Types, Type>, mapper: Mapper): typeof childGroup => ({
   ...childGroup,
   mapper,
 })

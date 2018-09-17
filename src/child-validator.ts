@@ -8,14 +8,32 @@ import {
   Mapper,
   ReactChild,
   ReactElement,
+  IChildMatch,
 } from "./child-validator-types";
 import { validateChild } from "./child-validator-utils";
 
-export class ReactChildValidator {
+type ExtractObject<Class> = Class extends { new(_?: any, __?: any): infer Initialized } ? Initialized : Class;
+
+type TransformType<ChildUnion, Type, Extracted = ExtractObject<ChildUnion>> = Type extends "one" ? Extracted
+  : Type extends "optional" ? Extracted | undefined
+  : Type extends "array" ? Array<Extracted>
+  : never;
+
+type ChildGroupsMapper<ChildGroups extends IChildGroup<any, any>[]> = {
+  [Key in keyof ChildGroups]: ChildGroups[Key] extends { match: IChildMatch<infer Child>, type?: infer Type }
+    ? Child extends any[]
+      ? ((...all: Child) => void) extends ((...all: Array<infer ChildUnion>) => void)
+        ? TransformType<ChildUnion, Type>
+        : never // Will always be an array
+      : never // Will always be an array
+    : never; // Will always be in IChildGroup
+}
+
+export class ReactChildValidator<Groups extends IChildGroup<any, any>[]> {
   /* children to validate */
   private children: ReactElement[];
   /* groups to validate against */
-  private groups: IChildGroup[];
+  private groups: Groups;
   /* parent component's class */
   private componentClass: HasDisplayName;
   /* props of the parent component */
@@ -31,7 +49,7 @@ export class ReactChildValidator {
     componentClass: HasDisplayName,
     props: Object = { },
     children: ReactChild[],
-    groups: IChildGroup[],
+    groups: Groups,
     throwError = false,
     skipMapper = false,
   ) {
@@ -50,7 +68,7 @@ export class ReactChildValidator {
   /*
    * Loops through all the expected child groups, validates, and returns the mapped result
    */
-  matchChildren(): ChildGroupMatchReturn[] {
+  matchChildren(): ChildGroupsMapper<Groups> {
     const mapped = this.groups.map(childGroup => {
       const matched = this.match({
         ...childGroup,
@@ -78,7 +96,8 @@ export class ReactChildValidator {
       this.throwError,
     );
 
-    return mapped;
+    // React doesn't type the children correctly
+    return mapped as any;
   }
 
   /*
@@ -86,7 +105,7 @@ export class ReactChildValidator {
    * `max` is reached based on the provided range. When a child is matched apply
    * the mapper on the child
    */
-  private match(childGroup: IChildGroup): ReactElement[] {
+  private match(childGroup: IChildGroup<any, any>): ReactElement[] {
     const childrenMatched: ReactElement[] = [];
 
     while (

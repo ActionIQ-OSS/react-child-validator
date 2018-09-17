@@ -1,6 +1,6 @@
 import * as React from "react";
 const { mount, render } = require("enzyme");
-import { oneOf, zeroOrMoreOf, BaseClass } from "../src/";
+import { oneOf, zeroOrMoreOf, BaseClass, children } from "../src/";
 
 class Element1 extends BaseClass<any, any> {
   static displayName = "Element1";
@@ -26,23 +26,19 @@ class Element3 extends BaseClass<any, any> {
   }
 }
 
-class Wrapper1 extends BaseClass<any, any> {
+class Wrapper1 extends BaseClass<any, any, typeof Wrapper1> {
   static displayName = "Wrapper1";
 
   static propTypes = BaseClass.childValidatorProps(Wrapper1);
 
-  static childGroups = [
+  static childGroups = children(
     oneOf(Element1),
     oneOf(Element2),
     zeroOrMoreOf(Element3, Element2),
-  ];
+  );
 
   render() {
-    const [el1, el2, el3] = this.matchChildren() as [
-      React.ReactElement<any>,
-      React.ReactElement<any>,
-      React.ReactElement<any>[]
-    ];
+    const [el1, el2, el3] = this.matchChildren();
 
     return (
       <div>
