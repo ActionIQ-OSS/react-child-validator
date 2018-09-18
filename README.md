@@ -1,6 +1,9 @@
 ## react-child-validator
 Validates and matches a React component's children at runtime against a specified configuration.
 
+### Why?
+Read more about why we build this here: https://medium.com/actioniq-tech/who-are-my-children-8b6b27da57ce
+
 ### Install
 ```
 $ npm install --save react-child-validator
