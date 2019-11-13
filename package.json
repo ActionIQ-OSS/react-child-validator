@@ -1,6 +1,6 @@
 {
   "name": "react-child-validator",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "A utility to validate the structure of a React component's children at runtime",
   "main": "dist/src/index.js",
   "scripts": {
